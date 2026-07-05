@@ -11,14 +11,17 @@
 - [Drawing Validation](articles/drawing-standards/drawing-validation.md) — Snap checks, dimension consistency, layer audits, error-feedback loops
 
 ## MCP Bridge
-- [MCP Bridge Architecture](articles/mcp-bridge/mcp-bridge-architecture.md) — Protocol, components, troubleshooting, VM management
+- [MCP Bridge Architecture](articles/mcp-bridge/mcp-bridge-architecture.md) — Protocol, components, PostMessage, VM management
+- [Troubleshooting](articles/mcp-bridge/troubleshooting.md) — Common issues, diagnostics, recovery sequence, autocomplete workaround
 
 ## LISP Automation
 - [LISP Fundamentals](articles/lisp-automation/lisp-fundamentals.md) — Syntax, commands, entities, selection sets, file I/O
 
 ## Skills
-- [Start AutoCAD Bridge](skills/start-autocad-bridge.md) — VM startup, agent verification, connectivity test
-- [Send AutoCAD Command](skills/send-autocad-command.md) — MCP tools, direct TCP, LISP execution
+- [Start AutoCAD Bridge](skills/start-autocad-bridge.md) — VM startup, agent verification, dispatcher loading via SCRIPT
+- [Send AutoCAD Command](skills/send-autocad-command.md) — MCP tools, direct TCP, LISP execution, SCRIPT method
+- [Recover Bridge](skills/recover-bridge.md) — Full recovery from any broken state: screenshot → dismiss → clean → reload
+- [Take Screenshot](skills/take-screenshot.md) — Capture VM screen for diagnostics (GDI-based, no PIL)
 - [Map Model Space Regions](skills/map-model-space-regions.md) — Viewport analysis, spatial mapping
 - [Setup Standard Layers](skills/setup-standard-layers.md) — Layer, text, and dimension style setup
 - [Create Sheet Viewport](skills/create-sheet-viewport.md) — Viewport creation, scaling, layer freezing

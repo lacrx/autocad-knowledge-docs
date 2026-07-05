@@ -16,41 +16,50 @@ sg libvirt -c 'LIBVIRT_DEFAULT_URI=qemu:///system virsh start win11-autocad'
 
 2. **Verify win_agent.py is running**
 ```bash
-ssh 192.168.122.147 "tasklist /FI \"IMAGENAME eq python.exe\" /V /FO CSV"
+echo '{"command":"ping"}' | timeout 5 nc 192.168.122.147 9876
 ```
-If not running:
+If connection refused:
 ```bash
 ssh 192.168.122.147 "powershell -Command \"Start-ScheduledTask -TaskName 'StartWinAgent'\""
 ```
+Wait 5s, retry ping.
 
-3. **Test connectivity**
-Call `mcp__autocad__ping` or:
-```python
-import socket, json
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.settimeout(10)
-s.connect(('192.168.122.147', 9876))
-s.sendall(json.dumps({'command': 'ping'}).encode() + b'\n')
-print(json.loads(s.recv(4096)))
-s.close()
+3. **Check ping response**
+- `autocad_found: true` → AutoCAD is running
+- `autocad_found: false` → Open AutoCAD manually on VM, or:
+  ```bash
+  ssh 192.168.122.147 'start "" "Z:\LaCroix_ADU.dwg"'
+  ```
+
+4. **Load LISP dispatcher via SCRIPT command**
+
+IMPORTANT: Do NOT use `(load ...)` via the `type` command — AutoCAD's autocomplete intercepts it and opens the APPLOAD dialog. Use `_.SCRIPT` instead:
+
+```bash
+# Ensure load script exists on VM (one-time setup)
+echo '(load "C:/autocad_mcp/mcp_dispatch.lsp")' > /tmp/load_dispatch.scr
+scp /tmp/load_dispatch.scr thomas@192.168.122.147:C:/temp/load_dispatch.scr
+
+# Load dispatcher
+echo '{"command":"type","text":"_.SCRIPT C:/temp/load_dispatch.scr"}' | timeout 10 nc 192.168.122.147 9876
 ```
 
-4. **Load LISP dispatcher in AutoCAD**
-```python
-send_cmd({'command': 'type', 'text': '(load "C:/autocad_mcp/mcp_dispatch.lsp")'})
-```
-
-5. **Verify full pipeline**
-```python
-send_cmd({'request_id': 'test', 'command': 'drawing-info'})
+5. **Verify full pipeline (wait 3-5s after load)**
+```bash
+sleep 5
+echo '{"request_id":"verify","command":"drawing-info"}' | timeout 15 nc 192.168.122.147 9876
 ```
 Should return entity count and layer list.
 
 ## Troubleshooting
 
-| Issue | Fix |
-|-------|-----|
-| Connection refused | VM not running or win_agent.py not started |
-| Timeout on drawing-info | LISP dispatcher not loaded — reload it |
-| "AutoCAD not found" | AutoCAD LT not running — open it manually or via `start` |
-| PostMessage not reaching | AutoCAD may not be foreground window |
+| Issue | Diagnostic | Fix |
+|-------|-----------|-----|
+| Connection refused | VM or agent not running | Start VM, then scheduled task |
+| Ping OK but drawing-info timeout | Dispatcher not loaded or dialog blocking | Take screenshot, dismiss dialogs, reload via SCRIPT |
+| `type` sends OK but no effect | PostMessage not reaching command line | Set foreground first, use SCRIPT for LISP |
+| APPLOAD dialog appears | Used `(load ...)` via `type` | Dismiss with ESC, use `_.SCRIPT` instead |
+| Stale IPC files in C:\temp | Previous failed commands | `del C:\temp\autocad_mcp_cmd_*.json` then reload |
+| Wrong AutoCAD instance | Multiple windows open | Add `"target": "LaCroix"` to requests |
+
+See [troubleshooting article](../articles/mcp-bridge/troubleshooting.md) for full recovery sequence.
