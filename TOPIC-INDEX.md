@@ -17,6 +17,20 @@
 ## LISP Automation
 - [LISP Fundamentals](articles/lisp-automation/lisp-fundamentals.md) — Syntax, commands, entities, selection sets, file I/O
 
+## Drawing Commands
+Reusable command recipes organized by task — ready to adapt and execute.
+- [Geometry](commands/geometry.md) — Lines, polylines, rectangles, arcs, circles, coordinate systems
+- [Walls](commands/walls.md) — Wall segments, corners, openings, thickness reference, LISP helper
+- [Dimensions](commands/dimensions.md) — Linear, aligned, angular, continuous, baseline, leaders
+- [Text and Notes](commands/text-and-notes.md) — TEXT, MTEXT, room labels, general notes, text heights
+- [Blocks](commands/blocks.md) — Insert, attributes, doors, windows, fixtures, symbols
+- [Hatching](commands/hatching.md) — Solid fills, pattern hatches, architectural patterns
+- [Layers](commands/layers.md) — Create, set, freeze, standard layer scheme by discipline
+- [Viewports](commands/viewports.md) — Paper space viewports, scales, layer presets by sheet
+- [Annotation](commands/annotation.md) — Section marks, elevation marks, detail callouts, tags
+- [Modification](commands/modification.md) — Move, copy, mirror, offset, trim, extend, array
+- [Selection](commands/selection.md) — Selection sets, filters, entity queries, iteration
+
 ## Skills
 - [Start AutoCAD Bridge](skills/start-autocad-bridge.md) — VM startup, agent verification, dispatcher loading via SCRIPT
 - [Send AutoCAD Command](skills/send-autocad-command.md) — MCP tools, direct TCP, LISP execution, SCRIPT method

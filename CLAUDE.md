@@ -15,5 +15,10 @@ gh api repos/lacrx/autocad-knowledge-docs/contents/{path} -H "Accept: applicatio
 
 - `articles/` — Concept articles organized by domain
 - `skills/` — Step-by-step procedures for common tasks
-- `QUICK-REF.md` — Topic-to-article/skill mapping
+- `commands/` — Reusable drawing command recipes by task (geometry, walls, dims, text, blocks, etc.)
+- `QUICK-REF.md` — Topic-to-article/skill/command mapping
 - `TOPIC-INDEX.md` — Detailed topic index
+
+## Scope
+
+General AutoCAD LT knowledge: commands, drawing standards, MCP bridge protocol, LISP automation. Nothing machine-specific (see workhorse-knowledge-docs) or project-specific (lives in project repos).
