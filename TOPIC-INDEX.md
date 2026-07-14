@@ -11,8 +11,11 @@
 - [Drawing Validation](articles/drawing-standards/drawing-validation.md) — Snap checks, dimension consistency, layer audits, error-feedback loops
 
 ## MCP Bridge
-- [MCP Bridge Architecture](articles/mcp-bridge/mcp-bridge-architecture.md) — Protocol, components, PostMessage, VM management
+- [MCP Bridge Architecture](articles/mcp-bridge/mcp-bridge-architecture.md) — Protocol, components, PostMessage, file IPC, VM management
 - [Troubleshooting](articles/mcp-bridge/troubleshooting.md) — Common issues, diagnostics, recovery sequence, autocomplete workaround
+- [CAD MCP Ecosystem](articles/mcp-bridge/cad-mcp-ecosystem.md) — Landscape of 15+ CAD MCP projects across Revit, Rhino, FreeCAD, AutoCAD. Architecture camps, key people, commercial offerings.
+- [Design Patterns](articles/mcp-bridge/design-patterns.md) — Escape hatches, composable tools, transport comparison, session persistence, safety tiers, QA tools. Patterns proven across multiple independent implementations.
+- [Improvement Ideas](articles/mcp-bridge/improvement-ideas.md) — Actionable improvements for our bridge: audit trail, server-side validation, snapshot diff, tool consolidation, mock mode, safety tiers. Prioritized by effort vs impact.
 
 ## LISP Automation
 - [LISP Fundamentals](articles/lisp-automation/lisp-fundamentals.md) — Syntax, commands, entities, selection sets, file I/O
@@ -38,7 +41,3 @@ Reusable command recipes organized by task — ready to adapt and execute.
 - [Take Screenshot](skills/take-screenshot.md) — Capture VM screen for diagnostics (GDI-based, no PIL)
 - [Map Model Space Regions](skills/map-model-space-regions.md) — Viewport analysis, spatial mapping
 - [Setup Standard Layers](skills/setup-standard-layers.md) — Layer, text, and dimension style setup
-- [Create Sheet Viewport](skills/create-sheet-viewport.md) — Viewport creation, scaling, layer freezing
-- [Draw Wall Segment](skills/draw-wall-segment.md) — Proper wall construction with polylines and hatching
-- [Validate Drawing Accuracy](skills/validate-drawing-accuracy.md) — Post-modification validation workflow
-- [Execute LISP Script](skills/execute-lisp-script.md) — Running curated LISP library scripts
