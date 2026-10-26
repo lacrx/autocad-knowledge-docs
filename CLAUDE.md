@@ -21,4 +21,4 @@ gh api repos/lacrx/autocad-knowledge-docs/contents/{path} -H "Accept: applicatio
 
 ## Scope
 
-General AutoCAD LT knowledge: commands, drawing standards, MCP bridge protocol, LISP automation. Nothing machine-specific (see workhorse-knowledge-docs) or project-specific (lives in project repos).
+General AutoCAD LT knowledge: commands, drawing standards, MCP bridge protocol, LISP automation. Nothing machine-specific (see lan-knowledge-docs) or project-specific (lives in project repos).
